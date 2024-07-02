@@ -24,5 +24,5 @@ def nada_main():
     result = result_z + result_r
     # make sure you change the output below to be your new output
 
-    return [Output(result, "my_output", party1)
+    return [Output(result, "The Result(+) of X and Y of Linear Equation", party1)
     ]

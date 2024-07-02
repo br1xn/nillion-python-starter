@@ -36,7 +36,12 @@ async def main():
 
     # Create a secret
     stored_secret = nillion.Secrets({
-        "my_int1": nillion.SecretInteger(500),
+        "my_int1": nillion.SecretInteger(2),
+        "my_int2": nillion.SecretInteger(3),
+        "my_int3": nillion.SecretInteger(4),
+        "my_int4": nillion.SecretInteger(5),
+        "my_int5": nillion.SecretInteger(6),
+        "my_int6": nillion.SecretInteger(7)
     })
     secret_bindings = nillion.ProgramBindings(program_id)
     secret_bindings.add_input_party(party_name, party_id)
@@ -54,7 +59,12 @@ async def main():
     print(f"Computing using program {program_id}")
     print(f"Use secret store_id: {store_id}")
 
-    computation_time_secrets = nillion.Secrets({"my_int2": nillion.SecretInteger(10)})
+    computation_time_secrets = nillion.Secrets({"my_int2": nillion.SecretInteger(3)})
+    computation_time_secrets = nillion.Secrets({"my_int3": nillion.SecretInteger(4)})
+    computation_time_secrets = nillion.Secrets({"my_int4": nillion.SecretInteger(5)})
+    computation_time_secrets = nillion.Secrets({"my_int5": nillion.SecretInteger(6)})
+    computation_time_secrets = nillion.Secrets({"my_int6": nillion.SecretInteger(7)})
+
 
     # Compute on the secret
     compute_id = await client.compute(
@@ -71,7 +81,7 @@ async def main():
         compute_event = await client.next_compute_event()
         if isinstance(compute_event, nillion.ComputeFinishedEvent):
             print(f"✅  Compute complete for compute_id {compute_event.uuid}")
-            print(f"🖥️  The result is {compute_event.result.value}")
+            print(f"🖥️ ", compute_event.result.value)
             return compute_event.result.value
 
 
@@ -82,4 +92,4 @@ if __name__ == "__main__":
 @pytest.mark.asyncio
 async def test_main():
     result = await main()
-    assert result == {'my_output': 510}
+    assert result == {'my_output': 221}
